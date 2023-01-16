@@ -80,7 +80,7 @@ module Primer
         system_arguments[:id] = "overlay-show-#{@system_arguments[:id]}"
         system_arguments["popovertoggletarget"] = @system_arguments[:id]
         system_arguments[:data] = (system_arguments[:data] || {}).merge({ "show-dialog-id": @system_arguments[:id] })
-        Primer::ButtonComponent.new(**system_arguments)
+        Primer::Beta::Button.new(**system_arguments)
       }
 
       # Header content.
@@ -156,7 +156,7 @@ module Primer
       )
         @system_arguments = deny_tag_argument(**system_arguments)
 
-        @system_arguments[:tag] = "primer-overlay"
+        @system_arguments[:tag] = "div"
         @system_arguments[:role] = fetch_or_fallback(ROLE_OPTIONS, role)
 
         @system_arguments[:id] = id.to_s

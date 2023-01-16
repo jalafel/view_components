@@ -1,7 +1,7 @@
+import '@oddbird/popover-polyfill'
 import './alpha/dropdown'
 import './alpha/image_crop'
 import './alpha/modal_dialog'
-import './alpha/primer_overlay_element'
 import './alpha/nav_list'
 import './alpha/segmented_control'
 import './alpha/toggle_switch'
