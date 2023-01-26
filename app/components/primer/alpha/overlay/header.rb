@@ -15,6 +15,7 @@ module Primer
 
         # @param title [String] Describes the content of the Overlay.
         # @param subtitle [String] Provides dditional context for the Overlay, also setting the `aria-describedby` attribute.
+        # @param size [Symbol] The size of the Header. <%= one_of(Primer::Alpha::Overlay::Header::SIZE_OPTIONS) %>
         # @param divider [Boolean] Show a divider between the header and body.
         # @param visually_hide_title [Boolean] Visually hide the `title` while maintaining a label for assistive technologies.
         # @param system_arguments [Hash] <%= link_to_system_arguments_docs %>

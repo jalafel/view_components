@@ -33,13 +33,13 @@ module Primer
 
       DEFAULT_PLACEMENT = :anchored
       PLACEMENT_MAPPINGS = {
-        DEFAULT_PLACEMENT => "Overlay--placement-anchored",
-        :center => "Overlay--placement-center",
-        :full => "Overlay--placement-full",
-        :top => "Overlay--placement-top",
-        :bottom => "Overlay--placement-bottom",
-        :start => "Overlay--placement-start",
-        :end => "Overlay--placement-end"
+        DEFAULT_PLACEMENT => "Overlay-backdrop--anchored",
+        :center => "Overlay-backdrop--center",
+        :full => "Overlay-backdrop--full",
+        :top => "Overlay-backdrop--top",
+        :bottom => "Overlay-backdrop--bottom",
+        :start => "Overlay-backdrop--start",
+        :end => "Overlay-backdrop--end"
       }.freeze
       PLACEMENT_OPTIONS = [nil, *PLACEMENT_MAPPINGS.keys].freeze
 
@@ -146,6 +146,7 @@ module Primer
         defaultopen: false,
         size: DEFAULT_SIZE,
         placement: DEFAULT_PLACEMENT,
+        anchor: nil,
         anchor_align: DEFAULT_ANCHOR_ALIGN,
         anchor_side: DEFAULT_ANCHOR_SIDE,
         allow_out_of_bounds: false,
@@ -156,23 +157,28 @@ module Primer
       )
         @system_arguments = deny_tag_argument(**system_arguments)
 
-        @system_arguments[:tag] = "div"
+        @system_arguments[:tag] = "anchored-position"
         @system_arguments[:role] = fetch_or_fallback(ROLE_OPTIONS, role)
+
+        placement = fetch_or_fallback(PLACEMENT_OPTIONS, placement, DEFAULT_PLACEMENT)
 
         @system_arguments[:id] = id.to_s
         @system_arguments[:classes] = class_names(
           "Overlay",
-          "Overlay-whenNarrow",
           SIZE_MAPPINGS[fetch_or_fallback(SIZE_OPTIONS, size, DEFAULT_SIZE)],
           "Overlay--motion-scaleFade",
           system_arguments[:classes]
         )
-        @backdrop_classes = class_names(
-          "Overlay-backdrop",
-          PLACEMENT_MAPPINGS[fetch_or_fallback(PLACEMENT_OPTIONS, placement, nil)],
-          ANCHOR_ALIGN_MAPPINGS[fetch_or_fallback(ANCHOR_ALIGN_OPTIONS, anchor_align, DEFAULT_ANCHOR_ALIGN)],
-          ANCHOR_SIDE_MAPPINGS[fetch_or_fallback(ANCHOR_SIDE_OPTIONS, anchor_side, DEFAULT_ANCHOR_SIDE)]
-        )
+        if placement == DEFAULT_PLACEMENT
+          @system_arguments[:anchor] = anchor || "overlay-show-#{@system_arguments[:id]}"
+          @backdrop_classes = class_names(
+            PLACEMENT_MAPPINGS[placement],
+            ANCHOR_ALIGN_MAPPINGS[fetch_or_fallback(ANCHOR_ALIGN_OPTIONS, anchor_align, DEFAULT_ANCHOR_ALIGN)],
+            ANCHOR_SIDE_MAPPINGS[fetch_or_fallback(ANCHOR_SIDE_OPTIONS, anchor_side, DEFAULT_ANCHOR_SIDE)],
+          )
+        else
+          @backdrop_classes = class_names(PLACEMENT_MAPPINGS[placement])
+        end
 
         @id = id.to_s
         @title = title
