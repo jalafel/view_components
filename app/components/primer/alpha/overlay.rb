@@ -157,7 +157,6 @@ module Primer
       )
         @system_arguments = deny_tag_argument(**system_arguments)
 
-        @system_arguments[:tag] = "anchored-position"
         @system_arguments[:role] = fetch_or_fallback(ROLE_OPTIONS, role)
 
         placement = fetch_or_fallback(PLACEMENT_OPTIONS, placement, DEFAULT_PLACEMENT)
@@ -170,6 +169,7 @@ module Primer
           system_arguments[:classes]
         )
         if placement == DEFAULT_PLACEMENT
+          @system_arguments[:tag] = "anchored-position"
           @system_arguments[:anchor] = anchor || "overlay-show-#{@system_arguments[:id]}"
           @backdrop_classes = class_names(
             PLACEMENT_MAPPINGS[placement],
@@ -177,6 +177,7 @@ module Primer
             ANCHOR_SIDE_MAPPINGS[fetch_or_fallback(ANCHOR_SIDE_OPTIONS, anchor_side, DEFAULT_ANCHOR_SIDE)],
           )
         else
+          @system_arguments[:tag] = "div"
           @backdrop_classes = class_names(PLACEMENT_MAPPINGS[placement])
         end
 
