@@ -1,13 +1,11 @@
 <%= show_button %>
 
-<div class="<%= @backdrop_classes %>" hidden>
-  <%= render Primer::BaseComponent.new(**@system_arguments) do %>
-    <%= header %>
-    <% if content.present? %>
-      <%= content %>
-    <% else %>
-      <%= body %>
-      <%= footer %>
-    <% end %>
+<%= render Primer::BaseComponent.new(**@system_arguments) do %>
+  <%= header %>
+  <% if content.present? %>
+    <%= content %>
+  <% else %>
+    <%= body %>
+    <%= footer %>
   <% end %>
-</div>
+<% end %>
