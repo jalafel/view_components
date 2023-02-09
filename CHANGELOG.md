@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 0.0.122
+
+### Patch Changes
+
+- [#1818](https://github.com/primer/view_components/pull/1818) [`c8fa002f`](https://github.com/primer/view_components/commit/c8fa002f807c508c86cd387512e3e81ef01b1db3) Thanks [@camertron](https://github.com/camertron)! - Fix issue in TabPanels causing extra content to render twice
+
+* [#1814](https://github.com/primer/view_components/pull/1814) [`8090cda2`](https://github.com/primer/view_components/commit/8090cda2a389a99e100ecea979d40602a3d52ae6) Thanks [@camertron](https://github.com/camertron)! - Expose additional form components
+
 ## 0.0.121
 
 ### Patch Changes
